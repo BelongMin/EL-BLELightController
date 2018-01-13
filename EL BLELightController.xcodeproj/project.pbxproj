@@ -16,6 +16,8 @@
 		63410537200839330009B04F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63410535200839330009B04F /* LaunchScreen.storyboard */; };
 		63410542200839330009B04F /* EL_BLELightControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63410541200839330009B04F /* EL_BLELightControllerTests.swift */; };
 		6341054D200839330009B04F /* EL_BLELightControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6341054C200839330009B04F /* EL_BLELightControllerUITests.swift */; };
+		6341055C2008503D0009B04F /* ELPeripheralMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6341055A2008503D0009B04F /* ELPeripheralMainCell.swift */; };
+		6341055D2008503D0009B04F /* ELPeripheralMainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6341055B2008503D0009B04F /* ELPeripheralMainCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		63410548200839330009B04F /* EL BLELightControllerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "EL BLELightControllerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6341054C200839330009B04F /* EL_BLELightControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EL_BLELightControllerUITests.swift; sourceTree = "<group>"; };
 		6341054E200839330009B04F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6341055A2008503D0009B04F /* ELPeripheralMainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ELPeripheralMainCell.swift; sourceTree = "<group>"; };
+		6341055B2008503D0009B04F /* ELPeripheralMainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ELPeripheralMainCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,8 @@
 				63410527200839330009B04F /* AppDelegate.swift */,
 				6341052C200839330009B04F /* MasterViewController.swift */,
 				6341052E200839330009B04F /* DetailViewController.swift */,
+				6341055A2008503D0009B04F /* ELPeripheralMainCell.swift */,
+				6341055B2008503D0009B04F /* ELPeripheralMainCell.xib */,
 				63410530200839330009B04F /* Main.storyboard */,
 				63410533200839330009B04F /* Assets.xcassets */,
 				63410535200839330009B04F /* LaunchScreen.storyboard */,
@@ -241,6 +247,7 @@
 				63410537200839330009B04F /* LaunchScreen.storyboard in Resources */,
 				63410534200839330009B04F /* Assets.xcassets in Resources */,
 				63410532200839330009B04F /* Main.storyboard in Resources */,
+				6341055D2008503D0009B04F /* ELPeripheralMainCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +276,7 @@
 				6341052B200839330009B04F /* EL_BLELightController.xcdatamodeld in Sources */,
 				6341052D200839330009B04F /* MasterViewController.swift in Sources */,
 				6341052F200839330009B04F /* DetailViewController.swift in Sources */,
+				6341055C2008503D0009B04F /* ELPeripheralMainCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

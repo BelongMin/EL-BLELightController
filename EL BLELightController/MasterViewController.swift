@@ -13,7 +13,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
-
+    let cellIdentifier = "ELPeripheralCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +26,12 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
+        
+        tableView.register(ELPeripheralMainCell.self, forCellReuseIdentifier: cellIdentifier)
+        // Do any additional setup after loading the view, typically from a nib.
+        let nib = UINib(nibName: "ELPeripheralMainCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
+        tableView.rowHeight = 65
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -55,6 +61,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
+        tableView.reloadData()
     }
 
     // MARK: - Segues
@@ -83,10 +90,47 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ELPeripheralMainCell
         let event = fetchedResultsController.object(at: indexPath)
         configureCell(cell, withEvent: event)
+//        cell.nameLabel.text = event.timestamp?.description
+        switch (indexPath.row % 4) {
+        case 0:
+            cell.contentView.backgroundColor = UIColorFromRGB(rgbValue: 0xff7c92)
+        case 1:
+            cell.contentView.backgroundColor = UIColorFromRGB(rgbValue: 0x8ee5f5)
+        case 2:
+            cell.contentView.backgroundColor = UIColorFromRGB(rgbValue: 0xffd1b6)
+        case 3:
+            cell.contentView.backgroundColor = UIColorFromRGB(rgbValue: 0xffe4b9)
+        default:
+            break
+            //            cell.backgroundColor = UIColor(white: 1, alpha: 1)
+        }
+        
         return cell
+    }
+    
+//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        switch (indexPath.row % 4) {
+//        case 0:
+//            cell.backgroundColor = UIColorFromRGB(rgbValue: 0xff7c92)
+//        case 1:
+//            cell.backgroundColor = UIColorFromRGB(rgbValue: 0x8ee5f5)
+//        case 2:
+//            cell.backgroundColor = UIColorFromRGB(rgbValue: 0xffd1b6)
+//        case 3:
+//            cell.backgroundColor = UIColorFromRGB(rgbValue: 0xffe4b9)
+//        default:
+//            break
+////            cell.backgroundColor = UIColor(white: 1, alpha: 1)
+//        }
+//    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        NSLog("\(indexPath.row)")
+        self.performSegue(withIdentifier: "showDetail", sender: nil)
     }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -110,8 +154,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
     }
 
-    func configureCell(_ cell: UITableViewCell, withEvent event: Event) {
-        cell.textLabel!.text = event.timestamp!.description
+    func configureCell(_ cell: ELPeripheralMainCell, withEvent event: Event) {
+//        cell.textLabel!.text = event.timestamp!.description
+        cell.nameLabel.text = event.timestamp?.description
+        cell.checkImage.isHidden = true
     }
 
     // MARK: - Fetched results controller
@@ -172,9 +218,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             case .delete:
                 tableView.deleteRows(at: [indexPath!], with: .fade)
             case .update:
-                configureCell(tableView.cellForRow(at: indexPath!)!, withEvent: anObject as! Event)
+                configureCell(tableView.cellForRow(at: indexPath!)! as! ELPeripheralMainCell, withEvent: anObject as! Event)
             case .move:
-                configureCell(tableView.cellForRow(at: indexPath!)!, withEvent: anObject as! Event)
+                configureCell(tableView.cellForRow(at: indexPath!)! as! ELPeripheralMainCell, withEvent: anObject as! Event)
                 tableView.moveRow(at: indexPath!, to: newIndexPath!)
         }
     }
@@ -191,6 +237,15 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
          tableView.reloadData()
      }
      */
+    
+    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
 
 }
 
